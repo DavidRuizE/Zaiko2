@@ -61,6 +61,9 @@ def venderProducto(request,pk):
         numero=producto.objects.get(id=pk)
         if numero.Cantidad > 0:
             numero.Cantidad-=1
+            numero.Vendido=True
+            numero.CantidadVendida+=1
+            numero.Ganancia+=numero.PrecioVenta
             numero.save()
             messages.success(request, 'Producto Vendido Exitosamente!')
             return redirect('/inventario/')
@@ -68,4 +71,29 @@ def venderProducto(request,pk):
             messages.error(request, 'No tiene más producto disponible para vender')
             return redirect('/inventario/')
     context={'producto': instance}
-    return render(request,'vender.html', context) 
+    return render(request,'vender.html', context,) 
+
+def ventas(request):
+    searchTerm= request.GET.get('buscarProducto')
+    if searchTerm:
+        venta = producto.objects.filter(Nombre__icontains=searchTerm)
+    else:
+        venta = producto.objects.filter(Vendido=True)
+
+    context={'searchTerm':searchTerm, 'ventas': venta}
+    return render(request, 'ventas.html', context)
+
+def eliminarVenta(request,pk):
+    instance2 = get_object_or_404(producto, id=pk)
+    if request.method == "POST":
+        numero2=producto.objects.get(id=pk)
+        if numero2.Cantidad > 0:
+            numero2.Vendido=False
+            numero2.CantidadVendida=0
+            numero2.Ganancia=0
+            numero2.save()
+            messages.success(request, 'Historial Borrado!')
+            return redirect('/ventas/')
+
+    context={'producto': instance2}
+    return render(request,'eliminarVenta.html', context,) 

@@ -37,14 +37,11 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title fw-bold"> Nombre: {{producto.Nombre}}</h5>
-                    <p class="card-text">Precio: ${{producto.Precio}}</p>
+                    <p class="card-text">Precio: ${{producto.PrecioVenta}}</p>
                     <p class="card-text">Cantidad: {{producto.Cantidad}}</p>
                     <p class="card-text">Descripción: {{producto.Descripción}}</p>
                     <a href = "{% url "vender" pk=producto.id %}" class="btn btn-success">Vender</button>
                     <a href = "{% url "editar" pk=producto.id %}"  class="btn btn-warning">Editar</a>
-                    {% if producto.url %}
-
-                    {% endif %}
                 </div>
             </div>
         </div>

@@ -1,0 +1,15 @@
+{% load static %}
+
+<link rel="stylesheet" href='{%static "css/vender.css" %}'>
+
+<center>
+<h1>Vas a eliminar la venta de {{producto}}?</h1>
+
+<form action="{% url 'eliminarVenta' producto.id %}" method="post">
+    {% csrf_token %}
+    <div class="link">
+    <a href="{% url 'inventario' %}">Cancelar</a>
+    </div>
+    <button type="submit" id="submit">Eliminar!</button>
+</form>
+</center>

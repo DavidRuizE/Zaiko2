@@ -6,4 +6,4 @@ from django import forms
 class productoForm(ModelForm):
     class Meta:
         model= producto
-        fields = '__all__'
+        fields = ['Nombre', 'PrecioCompra', 'PrecioVenta', 'Cantidad', 'Descripción']

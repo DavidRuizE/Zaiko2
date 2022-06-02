@@ -25,7 +25,9 @@ urlpatterns = [
     path('inventario/',inventarioViews.inv, name="inventario"),
     path('crear/',inventarioViews.crearProducto, name="crear"), 
     path('editar/<pk>/',inventarioViews.actualizarProducto, name="editar"),    
-    path('vender/<pk>/',inventarioViews.venderProducto, name="vender"),  
+    path('vender/<pk>/',inventarioViews.venderProducto, name="vender"),
+    path('eliminarVenta/<pk>/',inventarioViews.eliminarVenta, name="eliminarVenta"),  
+    path('ventas/',inventarioViews.ventas, name="ventas"), 
 ]
 
 
